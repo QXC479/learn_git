@@ -1,0 +1,29 @@
+//开辟额外的空间的方法
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int tmp[] = new int[nums.length];
+        for(int i = 0; i < nums.length; i++){
+            tmp[(i+k) % nums.length] = nums[i];
+        }
+        for(int i = 0; i < nums.length; i++){
+            nums[i] = tmp[i];
+        }
+    }
+}
+
+//进阶的方法，不使用额外空间，空间复杂度为O(1)
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length-1);
+        reverse(nums, 0, k-1);
+        reverse(nums, k, nums.length-1);
+    }
+    public void reverse(int[] nums, int start, int end){
+        while(end > start){
+            int tmp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = tmp;
+        }
+    }
+}
