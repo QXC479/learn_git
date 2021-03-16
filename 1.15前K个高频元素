@@ -1,0 +1,30 @@
+public int[] topKFrequent(int[] nums, int k) {
+    Map<Integer, Integer> map = new HashMap<>();
+    //初始化map
+    for(int i = 0; i < nums.length; i++){
+        if(map.containsKey(nums[i])){
+            map.put(nums[i], map.get(nums[i]) + 1);
+        }else{
+            map.put(nums[i], 1);
+        }
+    }
+    PriorityQueue<Integer> queue = new PriorityQueue<>(new Comparator<Integer>(){
+        public int compare(Integer a, Integer b){
+            return map.get(a) - map.get(b);
+        }
+    });
+    for(Integer key : map.keySet()){
+        if(queue.size() < k){
+            queue.offer(key);
+        }else if(map.get(key) > map.get(queue.peek())){//大值入队列，每次将k个堆中k个值中的最小值挤出，最后就剩下4个最大值
+            queue.poll();
+            queue.offer(key);
+        }
+    }
+    int res[] = new int[k];
+    int i = 0;
+    while(!queue.isEmpty()){
+        res[i++] = queue.poll();
+    }
+    return res;
+}
