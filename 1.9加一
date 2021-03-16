@@ -1,8 +1,9 @@
 public int[] plusOne(int[] digits) {
+    //注意是i>=0
     for(int i = digits.length - 1; i >= 0; i--){
         digits[i]++;
-        digits[i] = digits[i] % 10;
-        if(digits[i] != 0) return digits;
+        digits[i] = digits[i] % 10;//如果9+1变10，那么该位置应当是余数0
+        if(digits[i] != 0) return digits;//如果未进位，则直接返回即可
     }
     int digit_new[] = new int[digits.length + 1];
     digit_new[0] = 1;
