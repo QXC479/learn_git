@@ -1,0 +1,18 @@
+public List<Integer> preorder(Node root) {
+    List<Integer> res = new ArrayList<>();
+    Stack<Node> stack = new Stack<>();
+    stack.push(root);
+    while(!stack.isEmpty()){
+        root = stack.pop();
+        if(root != null){
+            res.add(root.val);
+            if(root.children != null){
+                //使用下面的循环控制左右子节点入栈的顺序
+                for(int i = root.children.size() - 1; i >= 0; i--){
+                    stack.push(root.children.get(i));//get(index)
+                }
+            }
+        }
+    }
+    return res;
+}
