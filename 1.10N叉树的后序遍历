@@ -1,0 +1,18 @@
+public List<Integer> postorder(Node root) {
+    Stack<Node> stack = new Stack<>();
+    List<Integer> list = new ArrayList<>();
+    stack.push(root);
+    while(!stack.isEmpty()){
+        root = stack.pop();
+        if(root != null){//注意要判断root，否则可能有空指针异常
+            list.add(root.val);
+            if(root.children != null){//同样空指针判断
+                for(Node child : root.children){
+                    stack.push(child);
+                }
+            }
+        } 
+    }
+    Collections.reverse(list);
+    return list;
+}
