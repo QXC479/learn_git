@@ -1,0 +1,27 @@
+public List<String> letterCombinations(String digits) {
+    if(digits == null || digits.length() == 0){
+        return new ArrayList();
+    }
+    Map<Character, String> map = new HashMap<>();
+    map.put('2', "abc");
+    map.put('3', "def");
+    map.put('4', "ghi");
+    map.put('5', "jkl");
+    map.put('6', "mno");
+    map.put('7', "pqrs");
+    map.put('8', "tuv");
+    map.put('9', "wxyz");
+    List<String> res = new ArrayList<>();
+    search(res, map, digits, "", 0);
+    return res;
+}
+public void search(List<String> res, Map<Character, String> map, String digits, String s, int index){
+    if(index == digits.length()){
+        res.add(s);
+        return;//别忘了写！！！！！
+    }
+    String str = map.get(digits.charAt(index));
+    for(int i = 0; i < str.length(); i++){
+        search(res, map, digits, s + str.charAt(i), index + 1);
+    }
+}
