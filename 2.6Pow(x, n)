@@ -1,0 +1,17 @@
+public double myPow(double x, int n) {
+    if(x==1 || x==0){
+        return x;
+    }
+    long N = n;
+    return n > 0 ? pow(x, N) : 1.0 / pow(x, -N);
+}
+public double pow(double x, long n){
+    //递归终止条件
+    if(n == 0){
+        return 1.0;
+    }
+    //分治drill down求出一半
+    double helf = pow(x, n / 2);
+    //处理当前层逻辑并返回
+    return n % 2 == 1 ? helf * helf * x : helf * helf;
+}
