@@ -1,0 +1,32 @@
+public List<List<Integer>> subsets(int[] nums) {
+    List<List<Integer>> res = new ArrayList<>();//结果集合
+    if(nums == null) return res;
+    DFS(res, nums, new ArrayList() ,0);
+    return res;
+}
+//参数：结果集合，原数组，临时集合，索引
+public void DFS(List<List<Integer>> res, int[] nums, List<Integer> list, int index){
+    //递归终止条件
+    if(index == nums.length){
+        res.add(new ArrayList(list));
+        return;
+    }
+    //Drill Down 不添加当前位置元素
+    DFS(res, nums, list, index+1);
+    //Drill Down 添加当前元素
+    list.add(nums[index]);
+    DFS(res, nums, list, index+1);
+    //reverse
+    list.remove(list.size() - 1);
+}
+
+解题思路：分治：将问题分为两个子问题：1.添加当前元素 2.不添加当前元素
+
+[]-[]-[]
+[]-[]-3
+然后要把3删了才能进行下面
+[]-2-[]
+[]-2-3
+然后要把3删了，返回，再把2删了，再返回
+1-[]-[]
+1-[]-3
