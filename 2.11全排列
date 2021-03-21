@@ -1,0 +1,26 @@
+public List<List<Integer>> permute(int[] nums) {
+    List<List<Integer>> res = new ArrayList<>();
+    if(nums.length == 0){
+        return res;
+    }
+    boolean[] used = new boolean[nums.length];
+    dfs(nums, res, new ArrayList(), 0, used);
+    return res;
+}
+public void dfs(int[] nums, List<List<Integer>> res, List<Integer> list, int depth, boolean[] used){
+    //递归终止条件
+    if(depth == nums.length){
+        res.add(new ArrayList(list));
+        return;
+    }
+    for(int i = 0; i < nums.length; i++){
+        if(!used[i]){
+            List<Integer> new_list = new ArrayList<>(list);
+            new_list.add(nums[i]);
+            boolean[] new_used = new boolean[nums.length];
+            System.arraycopy(used, 0, new_used, 0, nums.length);
+            new_used[i] = true;
+            dfs(nums, res, new_list, depth+1, new_used);
+        }
+    }
+}
