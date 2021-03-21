@@ -1,0 +1,18 @@
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+  if(root == null || root == p || root == q) return root;
+  TreeNode left = lowestCommonAncestor(root.left, p, q);
+  TreeNode right = lowestCommonAncestor(root.right, p, q);
+  if(left == null) return right;
+  if(right == null) return left;
+  return root;
+}
+
+解题思路：
+  三种情况：
+    1.p，q分别在公共祖先的两侧
+    2.p为公共祖先
+    3.q为公共祖先
+  所以分别drill down左右子树，查找p和q，
+      如果遍历左子树到最底部都没有p或q，就在右子树中，
+      如果遍历右子树到最底部都没有p或q，就在左子树中，
+      如果左右子树都没有遍历到底部(换言之分别找到了p和q)，那么当前的root就是最近公共祖先。
