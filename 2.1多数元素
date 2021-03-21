@@ -1,0 +1,18 @@
+public int MajorityElement(int[] nums){
+  int card_num = nums[0];
+  int count = 1;
+  for(int i = 0; i < nums.length; i++){
+    if(card_num == nums[i]{
+      count += 1;
+    }else if(--count == 0){
+      card_num = nums[i];
+      count = 1;
+    }
+  }
+  return card_num;
+}
+
+题解：摩尔投票法：初始化投票人card_num为第一位，
+      遍历数组遇到相同的就+1，
+      遇到不同的-1，且如果减到0，就将card_num更新，又开始重新计数。
+      最后返回的card_num必然是最多的那个元素
