@@ -1,0 +1,24 @@
+public int numIslands(char[][] grid) {
+    int islands = 0;//初始化岛屿数量
+    for(int i = 0; i < grid.length; i++){
+      for(int j = 0; j < grid[i].length; j++){
+        if(grid[i][j] == '0') continue;
+        islands += sink(grid, i, j);
+      }
+    }
+    return islands;
+}
+//将一个岛屿周围所有为1的位置置为0的函数
+public int sink(char[][] grid, int i, int j){
+  //递归终止条件
+  if(i < 0 || i == grid.length || j < 0 || j == grid[i].length || grid[i][j] == '0'){
+    return 0;
+  }
+  grid[i][j] = '0';
+  sink(grid, i-1, j);sink(grid, i+1, j);sink(grid, i, j+1);sink(grid, i, j-1);
+  return 1;
+}
+
+解题思路：
+  1代表陆地，0代表水，如果一个1的上下左右要么是边界，要么被0所包围，则为岛屿
+  我们遍历网格，每次遇到1，就将其置为0，并使用DFS算法将其周围的所有1置为0；随后返回结果1，表示有一个岛屿，最后将所有的1加起来即为岛屿结果
