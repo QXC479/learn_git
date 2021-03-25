@@ -1,0 +1,12 @@
+public boolean canJump(int[] nums) {
+    int destination = nums.length-1;
+    for(int i = destination - 1; i >= 0; i--){
+        if(nums[i] + i >= destination){
+            destination = i;
+
+        }
+    }
+    return destination == 0;
+}
+
+解题思路：从后往前贪心，每个元素值+其位置如果大于等于当前最后一节点，就往前移动到当前的最后节点，直到最后节点为0；贪心验证成功
