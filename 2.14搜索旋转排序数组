@@ -1,0 +1,28 @@
+public int search(int[] nums, int target) {
+    int l = 0, r = nums.length - 1;
+    while(l < r){
+        int mid = l + ((r - l) >> 1);
+        //0~mid有序(旋转点在mid后)，target在右侧 
+        if(nums[0] <= nums[mid] && (target < nums[0] || target > nums[mid])){
+            l = mid + 1;
+        //mid~r有序(旋转点在mid前)，target在右侧
+        }else if(nums[mid] < target && target < nums[0]){
+            l = mid + 1;
+        //target在左侧
+        }else{
+            r = mid;
+        }
+    }
+    return l == r && nums[l] == target ? l : -1;
+}
+解题思路/注意事项。
+  1. 通过mid将数组分成前后两部分，那么就产生了两种情况：
+     1> 前半段有序，此时旋转点在mid后，那么后半段无序
+     2> 后半段有序，此时旋转点在mid前，那么前半段有序
+     总之：两部分必有一部分是有序的。
+  2. 在上面这两种情况下，每种情况都会有target在前半段/后半段两种情况，由此总共有4种情况。
+  3. 用if和else if选取target在后半段的情况(不论旋转点在前或者在后)，那么else中就只剩下target在前半段的情况。
+  
+注：
+  1. 由于旋转的缘故，旋转点前部分的最小值 > 旋转点后部分的最大值
+  2. if条件中<= 无法换成 < ,否则遇到 nums[l]与nums[mid]重合的情况下，判断错误(target在右判断成左)
