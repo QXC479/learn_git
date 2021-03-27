@@ -1,0 +1,16 @@
+public int minPathSum(int[][] grid) {
+    for(int i = 0; i < grid.length; i++){
+        for(int j = 0; j < grid[i].length; j++){
+            if(i == 0 && j == 0) continue;
+            else if(i == 0) grid[i][j] = grid[i][j - 1] + grid[i][j];
+            else if(j == 0) grid[i][j] = grid[i - 1][j] + grid[i][j];
+            else grid[i][j] = Math.min(grid[i - 1][j], grid[i][j - 1]) + grid[i][j];
+        }
+    }
+    return grid[grid.length - 1][grid[0].length - 1];
+}
+
+解题思路：
+  将每个格子赋值为：到达当前格子的最小路径值。
+  先初始化最上面一行以及最左边一列，而这两列上每个格子都只能由同行同列的前一个元素所到达
+  剩下的元素只能由上方一格或左方一格所到达，累加到最后一格即可
