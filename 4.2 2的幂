@@ -1,0 +1,6 @@
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        return n > 0 && (n & (n - 1)) == 0;
+    }
+}
+注：将给定的整数进行位运算，去除最后一位1后为0则满足条件
