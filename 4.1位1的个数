@@ -1,0 +1,9 @@
+public int hammingWeight(int n) {
+    int sum = 0;
+    while (n != 0) {
+        sum++;
+        n &= (n - 1);
+    }
+    return sum;
+}
+注：每次去除最低位的1，去除几次就有几个1 ：x = x&(x-1)
